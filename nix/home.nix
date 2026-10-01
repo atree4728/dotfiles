@@ -14,15 +14,20 @@ in
     bat
     bottom
     coreutils-prefixed
+    delta
     dust
     eza
     fastfetch
     fd
     fzf
+    gh
+    ghq
+    git
     glow
     htop
     hyperfine
     jq
+    lazygit
     procs
     ripgrep
     starship
