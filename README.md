@@ -27,3 +27,5 @@ mise generate git-pre-commit --write --task=pre-commit  # once per clone
 mise run apply
 mise run vscode-extensions  # once per machine
 ```
+
+Homebrew packages that are not declared in `nix/homebrew.nix` are uninstalled by `mise run apply`, so declare a formula or cask there instead of running `brew install`.
