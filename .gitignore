@@ -9,3 +9,5 @@ result-*
 **/.nixos-test-history
 
 config/karabiner/automatic_backups/
+
+docs/superpowers/
