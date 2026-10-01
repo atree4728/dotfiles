@@ -1,0 +1,124 @@
+{
+    "workbench.colorTheme": "Catppuccin Frappé",
+    "editor.fontFamily": "PlemolJP35 Console NF",
+    "editor.fontSize": 14,
+    "editor.renderWhitespace": "boundary",
+    "editor.wordWrap": "on",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "editor.formatOnSave": true,
+    "github.copilot.enable": {
+        "quarto": false,
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "typst": false,
+        "": true,
+        "agda": false
+    },
+    "git.confirmSync": false,
+    "github.copilot.editor.enableAutoCompletions": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "update.showReleaseNotes": false,
+    "interactiveWindow.executeWithShiftEnter": true,
+    "tinymist.exportPdf": "onSave",
+    "tinymist.formatterMode": "typstyle",
+    "typst-lsp.exportPdf": "never",
+    "git.openRepositoryInParentFolders": "never",
+    "debug.console.fontFamily": "",
+    "workbench.iconTheme": "catppuccin-frappe",
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.inlayHints.pytestParameters": true,
+    "python.analysis.inlayHints.variableTypes": true,
+    "python.analysis.inlayHints.callArgumentNames": "all",
+    "FSharp.enableAnalyzers": true,
+    "FSharp.codeLenses.references.enabled": false,
+    "[typst]": {
+        "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?"
+    },
+    "[typst-code]": {
+        "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?"
+    },
+    "haskell.manageHLS": "GHCup",
+    "python.locator": "js",
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "typescript.tsserver.maxTsServerMemory": 8192,
+    "github.copilot.chat.localeOverride": "ja",
+    "remote.defaultExtensionsIfInstalledLocally": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "GitHub.vscode-pull-request-github"
+    ],
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "chat.agent.enabled": true,
+    "github.copilot.chat.agent.thinkingTool": true,
+    "python.analysis.typeCheckingMode": "standard",
+    "docker.extension.enableComposeLanguageServer": false,
+    "docker.extension.dockerEngineAvailabilityPrompt": false,
+    "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "agdaMode.connection.paths": [
+        "/Users/atree/.cabal/bin/agda"
+    ],
+    "typescript.implementationsCodeLens.enabled": true,
+    "typescript.implementationsCodeLens.showOnInterfaceMethods": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "lean4.alwaysAskBeforeInstallingLeanVersions": false,
+    "terminal.integrated.commandsToSkipShell": [
+        "language-julia.interrupt"
+    ],
+    "julia.symbolCacheDownload": true,
+    "tinymist.lint.enabled": true,
+    "workbench.view.showQuietly": {
+        "workbench.panel.output": true
+    },
+    "files.watcherExclude": {
+        "**/.bloop/**": true,
+        "**/.metals/**/*.{java,scala}": true
+    },
+    "json.schemaDownload.trustedDomains": {
+        "https://schemastore.azurewebsites.net/": true,
+        "https://raw.githubusercontent.com/": true,
+        "https://www.schemastore.org/": true,
+        "https://json.schemastore.org/": true,
+        "https://json-schema.org/": true,
+        "https://biomejs.dev": true
+    },
+    "latex-workshop.formatting.latex": "tex-fmt",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk (lualatex)",
+            "tools": [
+                "lualatexmk"
+            ]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "lualatexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-lualatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ]
+        }
+    ],
+    "latex-workshop.latex.autoClean.run": "onBuilt",
+    "chat.disableAIFeatures": true,
+    "claudeCode.preferredLocation": "sidebar",
+    "haskell.formattingProvider": "fourmolu",
+    "haskell.plugin.semanticTokens.globalOn": true,
+    "claudeCode.hideOnboarding": true,
+    "haskell.plugin.rename.config.crossModule": true,
+    "haskell.plugin.stan.globalOn": true
+}

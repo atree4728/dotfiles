@@ -27,5 +27,16 @@ in
         source = link path;
       });
 
+  home.file =
+    lib.genAttrs
+      [
+        "keybindings.json"
+        "settings.json"
+      ]
+      (file: {
+        target = "Library/Application Support/Code/User/${file}";
+        source = link "vscode/${file}";
+      });
+
   home.stateVersion = "26.11";
 }
