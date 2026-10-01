@@ -6,7 +6,7 @@ macOS environment managed with nix-darwin and home-manager.
 
 1. Install Xcode Command Line Tools: `xcode-select --install`
 2. Install [Determinate Nix](https://docs.determinate.systems/).
-3. Clone this repository and run the following in it.
+3. Clone this repository to `~/src/github.com/atree4728/dotfiles` (files under `config/` are symlinked from this path) and run the following in it.
 
 ```sh
 # nix-darwin manages this file and refuses to overwrite the installer's copy

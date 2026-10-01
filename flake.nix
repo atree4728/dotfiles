@@ -39,6 +39,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              backupFileExtension = "hm-backup";
               users.${username} = ./nix/home.nix;
             };
           }
