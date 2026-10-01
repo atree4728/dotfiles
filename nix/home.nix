@@ -28,6 +28,7 @@ in
     hyperfine
     jq
     lazygit
+    neovim
     procs
     ripgrep
     starship
