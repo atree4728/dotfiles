@@ -8,3 +8,4 @@ result-*
 # Ignore NixOS interactive test driver history
 **/.nixos-test-history
 
+config/karabiner/automatic_backups/

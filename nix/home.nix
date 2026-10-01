@@ -17,6 +17,7 @@ in
         "aerospace"
         "ghostty"
         "glow"
+        "karabiner"
         "lazygit"
         "mise/config.toml"
         "nvim"
