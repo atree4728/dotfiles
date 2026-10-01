@@ -91,5 +91,12 @@
       "zoom"
       "zotero"
     ];
+
+    masApps = {
+      Goodnotes = 1444383602;
+      Keynote = 409183694;
+      Kindle = 302584613;
+      LINE = 539883307;
+    };
   };
 }
