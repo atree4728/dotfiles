@@ -17,6 +17,7 @@ in
         "glow"
         "lazygit"
         "mise/config.toml"
+        "nvim"
         "starship.toml"
       ]
       (path: {
