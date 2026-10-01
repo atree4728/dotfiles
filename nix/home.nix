@@ -14,6 +14,7 @@ in
   xdg.configFile =
     lib.genAttrs
       [
+        "aerospace"
         "ghostty"
         "glow"
         "lazygit"
