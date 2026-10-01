@@ -34,6 +34,7 @@ in
     iverilog
     jq
     lazygit
+    mise
     neovim
     poppler-utils
     procs
