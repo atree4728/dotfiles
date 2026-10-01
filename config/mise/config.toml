@@ -10,7 +10,6 @@
 "cargo:tree-sitter-cli" = "latest"
 "cargo:ukebox" = "latest"
 "cargo:verylup" = "latest"
-claude = "latest"
 d2 = "latest"
 deno = "latest"
 dotnet = "latest"
