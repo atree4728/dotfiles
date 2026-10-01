@@ -16,6 +16,8 @@ in
       [
         "glow"
         "lazygit"
+        "mise/config.toml"
+        "starship.toml"
       ]
       (path: {
         source = link path;

@@ -1,0 +1,31 @@
+[tools]
+"cargo:cargo-compete" = "latest"
+"cargo:cargo-equip" = "latest"
+"cargo:cargo-udeps" = "latest"
+"cargo:evcxr_repl" = "latest"
+"cargo:ghcitty" = "latest"
+"cargo:hayagriva" = { version = "latest", features = "cli" }
+"cargo:hoogle-tui" = "latest"
+"cargo:tex-fmt" = "latest"
+"cargo:tree-sitter-cli" = "latest"
+"cargo:ukebox" = "latest"
+"cargo:verylup" = "latest"
+claude = "latest"
+d2 = "latest"
+deno = "latest"
+dotnet = "latest"
+"github:tfausak/cabal-gild" = "latest"
+go = "latest"
+golangci-lint = "latest"
+just = "latest"
+lua = "latest"
+node = "lts"
+"npm:difit" = "latest"
+python = "latest"
+taplo = "latest"
+usage = "latest"
+uv = "latest"
+yamlfmt = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
