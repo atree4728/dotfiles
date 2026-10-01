@@ -61,7 +61,6 @@
     "python.analysis.typeCheckingMode": "standard",
     "docker.extension.enableComposeLanguageServer": false,
     "docker.extension.dockerEngineAvailabilityPrompt": false,
-    "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "agdaMode.connection.paths": [
         "/Users/atree/.cabal/bin/agda"
