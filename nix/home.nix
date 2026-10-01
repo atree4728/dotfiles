@@ -15,6 +15,7 @@ in
     bat
     bottom
     coreutils-prefixed
+    dafny
     delta
     dust
     eza
@@ -29,6 +30,7 @@ in
     htop
     hyperfine
     imagemagick
+    iverilog
     jq
     lazygit
     neovim
@@ -36,8 +38,12 @@ in
     procs
     qemu
     ripgrep
+    (rocq-core.withPackages (ps: [ ps.stdlib ]))
     starship
+    swi-prolog
     tealdeer
+    typst
+    verilator
     wget
     yazi
     zoxide
