@@ -9,3 +9,11 @@ run = "nix run --inputs-from . nix-darwin -- build --flake .#Ree"
 [tasks.fmt]
 description = "Format all Nix files"
 run = "nix fmt"
+
+[tasks.check]
+description = "Evaluate the flake outputs"
+run = "nix flake check"
+
+[tasks.pre-commit]
+description = "Fail if any Nix file is not formatted"
+run = "nix fmt -- --ci"
