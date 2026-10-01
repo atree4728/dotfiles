@@ -10,6 +10,7 @@ let
 in
 {
   home.packages = with pkgs; [
+    awscli2
     bashInteractive
     bat
     bottom
@@ -19,6 +20,7 @@ in
     eza
     fastfetch
     fd
+    ffmpeg
     fzf
     gh
     ghq
@@ -26,10 +28,13 @@ in
     glow
     htop
     hyperfine
+    imagemagick
     jq
     lazygit
     neovim
+    poppler-utils
     procs
+    qemu
     ripgrep
     starship
     tealdeer
