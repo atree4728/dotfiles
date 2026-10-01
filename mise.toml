@@ -1,0 +1,7 @@
+[tasks.apply]
+description = "Build and activate the system configuration"
+run = "sudo nix run --inputs-from . nix-darwin -- switch --flake .#Ree"
+
+[tasks.build]
+description = "Build the system configuration without activating it"
+run = "nix run --inputs-from . nix-darwin -- build --flake .#Ree"
