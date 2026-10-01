@@ -23,4 +23,5 @@ Tasks are run with [mise](https://mise.jdx.dev/); `mise tasks` lists them.
 mise trust
 mise generate git-pre-commit --write --task=pre-commit  # once per clone
 mise run apply
+mise run vscode-extensions  # once per machine
 ```
