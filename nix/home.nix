@@ -37,6 +37,7 @@ in
     poppler-utils
     procs
     qemu
+    rip2
     ripgrep
     (rocq-core.withPackages (ps: [ ps.stdlib ]))
     starship
