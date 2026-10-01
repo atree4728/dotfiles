@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  llm-agents,
   ...
 }:
 let
@@ -48,6 +49,7 @@ in
     wget
     yazi
     zoxide
+    llm-agents.packages.${stdenv.hostPlatform.system}.claude-code
   ];
 
   xdg.configFile =

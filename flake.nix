@@ -12,6 +12,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
+    # No `follows`: upstream builds and tests against its own nixpkgs pin.
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =
@@ -20,6 +22,7 @@
       nix-darwin,
       home-manager,
       determinate,
+      llm-agents,
       ...
     }:
     let
@@ -42,6 +45,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "hm-backup";
+              extraSpecialArgs = { inherit llm-agents; };
               users.${username} = ./nix/home.nix;
             };
           }
