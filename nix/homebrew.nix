@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   homebrew = {
     enable = true;
@@ -7,6 +7,9 @@
       autoUpdate = false;
       upgrade = false;
       cleanup = "none";
+      # sudo drops XDG_CONFIG_HOME, so `trusted = true` would otherwise be recorded in
+      # ~/.homebrew/trust.json, which brew ignores in a shell that sets XDG_CONFIG_HOME.
+      extraEnv.XDG_CONFIG_HOME = "${config.users.users.${config.homebrew.user}.home}/.config";
     };
 
     taps =
