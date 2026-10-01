@@ -39,6 +39,10 @@
           ./nix/homebrew.nix
           home-manager.darwinModules.home-manager
           {
+            networking = {
+              hostName = hostname;
+              computerName = hostname;
+            };
             system.primaryUser = username;
             users.users.${username}.home = "/Users/${username}";
             home-manager = {
