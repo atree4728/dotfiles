@@ -16,6 +16,7 @@
 
   outputs =
     {
+      nixpkgs,
       nix-darwin,
       home-manager,
       determinate,
@@ -43,5 +44,7 @@
           }
         ];
       };
+
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
     };
 }
