@@ -33,8 +33,10 @@
           determinate.darwinModules.default
           { nixpkgs.hostPlatform = system; }
           ./nix/darwin.nix
+          ./nix/homebrew.nix
           home-manager.darwinModules.home-manager
           {
+            system.primaryUser = username;
             users.users.${username}.home = "/Users/${username}";
             home-manager = {
               useGlobalPkgs = true;
