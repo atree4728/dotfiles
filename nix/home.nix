@@ -9,7 +9,28 @@ let
   link = path: config.lib.file.mkOutOfStoreSymlink "${repo}/config/${path}";
 in
 {
-  home.packages = [ pkgs.hello ];
+  home.packages = with pkgs; [
+    bashInteractive
+    bat
+    bottom
+    coreutils-prefixed
+    dust
+    eza
+    fastfetch
+    fd
+    fzf
+    glow
+    htop
+    hyperfine
+    jq
+    procs
+    ripgrep
+    starship
+    tealdeer
+    wget
+    yazi
+    zoxide
+  ];
 
   xdg.configFile =
     lib.genAttrs
