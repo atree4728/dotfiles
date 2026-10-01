@@ -14,6 +14,7 @@ in
   xdg.configFile =
     lib.genAttrs
       [
+        "ghostty"
         "glow"
         "lazygit"
         "mise/config.toml"
