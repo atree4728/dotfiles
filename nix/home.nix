@@ -15,7 +15,6 @@ in
     lib.genAttrs
       [
         "glow"
-        "htop"
         "lazygit"
       ]
       (path: {
