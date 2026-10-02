@@ -13,6 +13,7 @@ in
   imports = [
     ./git.nix
     ./shell.nix
+    ./ssh.nix
   ];
 
   config = lib.mkMerge [
