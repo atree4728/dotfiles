@@ -68,8 +68,11 @@ description = "Format all Nix files"
 run = "nix fmt"
 
 [tasks.check]
-description = "Evaluate the flake outputs"
-run = "nix flake check --impure"
+description = "Evaluate the flake outputs, and the Linux configuration for x86_64-linux"
+run = [
+  "nix flake check --impure",
+  "nix eval --impure --system x86_64-linux --raw .#homeConfigurations.linux.activationPackage.drvPath > /dev/null",
+]
 
 [tasks.pre-commit]
 description = "Fail if any Nix file is not formatted"
