@@ -6,6 +6,37 @@ run = "sudo nix run --inputs-from . nix-darwin -- switch --flake .#Ree"
 description = "Build the system configuration without activating it"
 run = "nix run --inputs-from . nix-darwin -- build --flake .#Ree"
 
+[tasks.diff]
+description = "Show the package changes between the running system and ./result"
+run = "nix store diff-closures /run/current-system ./result"
+
+[tasks.update]
+description = "Update the flake inputs in flake.lock"
+run = "nix flake update"
+
+[tasks.upgrade]
+description = "Upgrade everything; pass -c to continue past a failing step"
+run = [
+  { task = "upgrade:nix" },
+  { task = "upgrade:determinate" },
+  { task = "upgrade:mas" },
+  { task = "upgrade:brew" },
+  { task = "upgrade:mise" },
+  { task = "upgrade:rustup" },
+  { task = "upgrade:ghcup" },
+  { task = "upgrade:elan" },
+  { task = "upgrade:juliaup" },
+  { task = "upgrade:opam" },
+]
+
+[tasks."upgrade:nix"]
+description = "Update the flake inputs and activate the result"
+run = [{ task = "update" }, { task = "build" }, { task = "diff" }, { task = "apply" }]
+
+[tasks."upgrade:determinate"]
+description = "Upgrade Determinate Nix"
+run = "sudo determinate-nixd upgrade"
+
 [tasks."upgrade:mas"]
 description = "Upgrade the Mac App Store apps"
 run = "sudo mas upgrade"
