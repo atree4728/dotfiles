@@ -82,12 +82,11 @@ lib.mkMerge [
     home.sessionPath = [
       "/opt/oss-cad-suite/bin"
       "/opt/homebrew/opt/llvm/bin"
+      "${homeDir}/.orbstack/bin"
     ];
 
     programs.fish.loginShellInit = lib.mkBefore ''
       fish_add_path --global --append --path (/usr/libexec/path_helper -s | string match --regex --groups-only '^PATH="(.*)";' | string split :)
-      /opt/homebrew/bin/brew shellenv fish | source
-      fish_add_path --global --move --append --path ${homeDir}/.orbstack/bin
     '';
   })
   (lib.mkIf isLinux {
