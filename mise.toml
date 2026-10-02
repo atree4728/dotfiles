@@ -27,6 +27,7 @@ run = [
   { task = "upgrade:elan" },
   { task = "upgrade:juliaup" },
   { task = "upgrade:opam" },
+  { task = "upgrade:nvim" },
 ]
 
 [tasks."upgrade:nix"]
@@ -72,6 +73,10 @@ run = "opam update && opam upgrade --yes"
 [tasks.gc]
 description = "Delete generations and Homebrew downloads older than 7 days, then collect garbage"
 run = ["sudo nix-collect-garbage --delete-older-than 7d", "brew cleanup --prune=7"]
+
+[tasks."upgrade:nvim"]
+description = "Upgrade the Neovim plugins and config/nvim/lazy-lock.json"
+run = "nvim --headless '+Lazy! update' +qa"
 
 [tasks.fmt]
 description = "Format all Nix files"
