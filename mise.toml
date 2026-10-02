@@ -6,6 +6,38 @@ run = "sudo nix run --inputs-from . nix-darwin -- switch --flake .#Ree"
 description = "Build the system configuration without activating it"
 run = "nix run --inputs-from . nix-darwin -- build --flake .#Ree"
 
+[tasks."upgrade:mas"]
+description = "Upgrade the Mac App Store apps"
+run = "sudo mas upgrade"
+
+[tasks."upgrade:brew"]
+description = "Upgrade the Homebrew formulae and casks"
+run = "brew update && brew upgrade --yes"
+
+[tasks."upgrade:mise"]
+description = "Upgrade the tools in the global mise config"
+run = "mise upgrade"
+
+[tasks."upgrade:rustup"]
+description = "Upgrade rustup and the Rust toolchains"
+run = "rustup update"
+
+[tasks."upgrade:ghcup"]
+description = "Upgrade ghcup"
+run = "ghcup upgrade"
+
+[tasks."upgrade:elan"]
+description = "Upgrade elan"
+run = "elan self update"
+
+[tasks."upgrade:juliaup"]
+description = "Upgrade juliaup and Julia"
+run = "juliaup self update && juliaup update"
+
+[tasks."upgrade:opam"]
+description = "Upgrade the packages in the current opam switch"
+run = "opam update && opam upgrade --yes"
+
 [tasks.fmt]
 description = "Format all Nix files"
 run = "nix fmt"
