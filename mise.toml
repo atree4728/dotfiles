@@ -46,7 +46,3 @@ run = "nix flake check"
 [tasks.pre-commit]
 description = "Fail if any Nix file is not formatted"
 run = "nix fmt -- --ci"
-
-[tasks.vscode-extensions]
-description = "Install the VS Code extensions listed in config/vscode/extensions.txt"
-run = "xargs -L1 code --install-extension < config/vscode/extensions.txt"

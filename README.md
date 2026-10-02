@@ -27,7 +27,6 @@ Tasks are run with [mise](https://mise.jdx.dev/); `mise tasks` lists them.
 mise trust
 mise generate git-pre-commit --write --task=pre-commit  # once per clone
 mise run apply
-mise run vscode-extensions  # once per machine
 ```
 
 ```sh
@@ -38,6 +37,8 @@ mise run gc       # delete generations older than 7 days; upgrade runs it too
 `mise run upgrade` runs [topgrade](https://github.com/topgrade-rs/topgrade), configured in `nix/home/topgrade.nix`; when a step fails it asks whether to retry, skip or quit, and each step can be run alone (`topgrade --only brew_formula`). It ends with `mise run gc` and `mise run lock`; the latter commits `flake.lock` and `config/nvim/lazy-lock.json` and nothing else; run it by hand after a step that was run alone. If the build fails after the update, `flake.lock` is restored.
 
 Homebrew packages that are not declared in `nix/homebrew.nix` are uninstalled by `mise run apply`, so declare a formula or cask there instead of running `brew install`.
+
+VS Code is only installed from here; its settings, keybindings and extensions are kept by its own Settings Sync, so sign in to it once per machine.
 
 ## Recovery
 

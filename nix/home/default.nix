@@ -89,11 +89,6 @@ in
           (path: {
             source = link path;
           });
-
-      home.file = {
-        "Library/Application Support/Code/User/keybindings.json".source = link "vscode/keybindings.json";
-        "Library/Application Support/Code/User/settings.json".source = link "vscode/settings.json";
-      };
     })
   ];
 }
