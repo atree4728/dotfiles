@@ -27,7 +27,6 @@
     brews = [
       "gcc"
       "llvm"
-      "podman"
       "riscv-software-src/riscv/riscv-tools"
     ];
 
