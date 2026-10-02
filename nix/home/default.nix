@@ -24,6 +24,7 @@ in
         bashInteractive
         bat
         bottom
+        cmake
         coreutils-prefixed
         dafny
         dust
@@ -33,6 +34,7 @@ in
         ffmpeg
         ghq
         glow
+        gnumake
         htop
         hyperfine
         imagemagick

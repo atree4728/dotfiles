@@ -28,12 +28,10 @@
         ];
 
     brews = [
-      "cmake"
       "felixkratz/formulae/borders"
       "gcc"
       "laishulu/homebrew/macism"
       "llvm"
-      "make"
       "opam"
       "pkgconf"
       "podman"
