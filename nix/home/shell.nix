@@ -2,12 +2,9 @@
   config,
   lib,
   pkgs,
-  llm-agents,
   ...
 }:
 let
-  repo = "${config.home.homeDirectory}/src/github.com/atree4728/dotfiles";
-  link = path: config.lib.file.mkOutOfStoreSymlink "${repo}/config/${path}";
   homeDir = config.home.homeDirectory;
   nixPath = [
     "/etc/profiles/per-user/${config.home.username}/bin"
@@ -28,59 +25,6 @@ lib.mkMerge [
     ];
 
     home.sessionVariables.EDITOR = "nvim";
-
-    xdg.enable = true;
-
-    home.packages = with pkgs; [
-      awscli2
-      bashInteractive
-      bat
-      bottom
-      coreutils-prefixed
-      dafny
-      dust
-      eza
-      fastfetch
-      fd
-      ffmpeg
-      ghq
-      glow
-      htop
-      hyperfine
-      imagemagick
-      iverilog
-      jq
-      lazygit
-      neovim
-      poppler-utils
-      procs
-      qemu
-      rip2
-      ripgrep
-      (rocq-core.withPackages (ps: [ ps.stdlib ]))
-      swi-prolog
-      tealdeer
-      typst
-      verilator
-      wget
-      yazi
-      llm-agents.packages.${stdenv.hostPlatform.system}.claude-code
-    ];
-
-    xdg.configFile =
-      lib.genAttrs
-        [
-          "glow"
-          "lazygit"
-          "mise/config.toml"
-          "nvim"
-          "starship.toml"
-        ]
-        (path: {
-          source = link path;
-        });
-
-    home.file.".claude/CLAUDE.md".source = link "claude/CLAUDE.md";
 
     programs.fish = {
       enable = true;
@@ -129,43 +73,6 @@ lib.mkMerge [
     programs.mise.enable = true;
     programs.starship.enable = true;
     programs.zoxide.enable = true;
-
-    programs.git = {
-      enable = true;
-      settings = {
-        user = {
-          name = "atree4728";
-          email = "atree.public@gmail.com";
-        };
-        init.defaultBranch = "main";
-        core.pager = "delta";
-        merge.conflictStyle = "zdiff3";
-        ghq.root = "~/src";
-      };
-      ignores = [
-        ".DS_Store"
-        ".idea"
-        ".vscode"
-        "**/.claude/settings.local.json"
-        "**/CLAUDE.local.md"
-        "mise.local.toml"
-      ];
-    };
-
-    programs.delta = {
-      enable = true;
-      enableGitIntegration = true;
-      options.navigate = true;
-    };
-
-    programs.gh = {
-      enable = true;
-      settings = {
-        git_protocol = "https";
-      };
-    };
-
-    home.stateVersion = "26.11";
   }
   (lib.mkIf pkgs.stdenv.isDarwin {
     home.sessionPath = [
@@ -173,22 +80,6 @@ lib.mkMerge [
       "/opt/homebrew/opt/llvm/bin"
       "/Applications/Ghostty.app/Contents/MacOS"
     ];
-
-    xdg.configFile =
-      lib.genAttrs
-        [
-          "aerospace"
-          "ghostty"
-          "karabiner"
-        ]
-        (path: {
-          source = link path;
-        });
-
-    home.file = {
-      "Library/Application Support/Code/User/keybindings.json".source = link "vscode/keybindings.json";
-      "Library/Application Support/Code/User/settings.json".source = link "vscode/settings.json";
-    };
 
     programs.fish.loginShellInit = lib.mkBefore ''
       fish_add_path --global --append --path (/usr/libexec/path_helper -s | string match --regex --groups-only '^PATH="(.*)";' | string split :)

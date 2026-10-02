@@ -50,7 +50,7 @@
               useUserPackages = true;
               backupFileExtension = "hm-backup";
               extraSpecialArgs = { inherit llm-agents; };
-              users.${username} = ./nix/home.nix;
+              users.${username} = ./nix/home;
             };
           }
         ];
