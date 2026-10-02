@@ -17,16 +17,13 @@ in
     bottom
     coreutils-prefixed
     dafny
-    delta
     dust
     eza
     fastfetch
     fd
     ffmpeg
     fzf
-    gh
     ghq
-    git
     glow
     htop
     hyperfine
@@ -73,6 +70,42 @@ in
     ".claude/CLAUDE.md".source = link "claude/CLAUDE.md";
     "Library/Application Support/Code/User/keybindings.json".source = link "vscode/keybindings.json";
     "Library/Application Support/Code/User/settings.json".source = link "vscode/settings.json";
+  };
+
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        name = "atree4728";
+        email = "atree.public@gmail.com";
+      };
+      init.defaultBranch = "main";
+      core.pager = "delta";
+      merge.conflictStyle = "zdiff3";
+      ghq.root = "~/src";
+    };
+    ignores = [
+      ".DS_Store"
+      ".idea"
+      ".vscode"
+      "**/.claude/settings.local.json"
+      "**/CLAUDE.local.md"
+      "mise.local.toml"
+    ];
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options.navigate = true;
+  };
+
+  programs.gh = {
+    enable = true;
+    settings = {
+      git_protocol = "https";
+      aliases.co = "pr checkout";
+    };
   };
 
   home.stateVersion = "26.11";
