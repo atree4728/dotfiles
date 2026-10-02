@@ -23,6 +23,10 @@ in
     {
       xdg.enable = true;
 
+      # Building the man page evaluates every option declaration, which trips
+      # the "options.json ... without a proper context" warning of Nix.
+      manual.manpages.enable = false;
+
       home.packages = with pkgs; [
         awscli2
         bashInteractive
