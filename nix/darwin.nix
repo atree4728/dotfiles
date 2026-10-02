@@ -13,6 +13,29 @@
   };
   environment.shells = [ pkgs.fish ];
 
+  fonts.packages = with pkgs; [
+    biz-ud-gothic
+    gyre-fonts
+    (ibm-plex.override {
+      families = [
+        "mono"
+        "sans"
+        "sans-jp"
+      ];
+    })
+    jetbrains-mono
+    lmodern
+    mplus-outline-fonts.githubRelease
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
+    newcomputermodern
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    plemoljp-nf
+    udev-gothic-nf
+  ];
+
   security.pam.services.sudo_local.touchIdAuth = true;
 
   system.defaults = {
