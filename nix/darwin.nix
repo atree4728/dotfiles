@@ -7,7 +7,10 @@
 {
   determinateNix.enable = true;
 
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    useBabelfish = true;
+  };
   environment.shells = [ pkgs.fish ];
 
   security.pam.services.sudo_local.touchIdAuth = true;
