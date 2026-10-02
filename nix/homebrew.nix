@@ -30,7 +30,6 @@
     brews = [
       "cmake"
       "felixkratz/formulae/borders"
-      "fish"
       "gcc"
       "laishulu/homebrew/macism"
       "llvm"

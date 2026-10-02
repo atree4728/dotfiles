@@ -8,10 +8,7 @@
   determinateNix.enable = true;
 
   programs.fish.enable = true;
-  environment.shells = [
-    pkgs.fish
-    "/opt/homebrew/bin/fish"
-  ];
+  environment.shells = [ pkgs.fish ];
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
