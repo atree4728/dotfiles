@@ -27,7 +27,7 @@ in
       commands.mise = "mise upgrade";
       pre_commands = {
         "Determinate Nix" = "sudo determinate-nixd upgrade";
-        "nix-darwin" = "mise -C ${repo} run upgrade:nix";
+        "Nix configuration" = "mise -C ${repo} run upgrade:nix";
       };
       post_commands = {
         "Garbage collection" = "mise -C ${repo} run gc";

@@ -1,14 +1,36 @@
+[settings]
+# The tasks only need Nix; do not install the global tools before running one.
+task.run_auto_install = false
+
 [tasks.apply]
-description = "Build and activate the system configuration"
-run = "sudo nix run --inputs-from . nix-darwin -- switch --flake .#mac"
+description = "Build and activate the configuration"
+run = '''
+case "$(uname)" in
+  Darwin) sudo nix run --inputs-from . nix-darwin -- switch --flake .#mac ;;
+  Linux) nix run --inputs-from . home-manager -- switch --impure -b hm-backup --flake .#linux ;;
+  *) echo "unsupported OS: $(uname)" >&2; exit 1 ;;
+esac
+'''
 
 [tasks.build]
-description = "Build the system configuration without activating it"
-run = "nix run --inputs-from . nix-darwin -- build --flake .#mac"
+description = "Build the configuration without activating it"
+run = '''
+case "$(uname)" in
+  Darwin) nix run --inputs-from . nix-darwin -- build --flake .#mac ;;
+  Linux) nix run --inputs-from . home-manager -- build --impure --flake .#linux ;;
+  *) echo "unsupported OS: $(uname)" >&2; exit 1 ;;
+esac
+'''
 
 [tasks.diff]
-description = "Show the package changes between the running system and ./result"
-run = "nix store diff-closures /run/current-system ./result"
+description = "Show the package changes between the active generation and ./result"
+run = '''
+case "$(uname)" in
+  Darwin) nix store diff-closures /run/current-system ./result ;;
+  Linux) nix store diff-closures "$HOME/.local/state/nix/profiles/home-manager" ./result ;;
+  *) echo "unsupported OS: $(uname)" >&2; exit 1 ;;
+esac
+'''
 
 [tasks.update]
 description = "Update the flake inputs in flake.lock"
@@ -32,11 +54,14 @@ run = [
 ]
 
 [tasks.gc]
-description = "Delete generations and Homebrew downloads older than 7 days, then collect garbage"
-run = [
-  "sudo nix-collect-garbage --delete-older-than 7d",
-  "brew cleanup --prune=7",
-]
+description = "Delete generations (and, on macOS, Homebrew downloads) older than 7 days, then collect garbage"
+run = '''
+case "$(uname)" in
+  Darwin) sudo nix-collect-garbage --delete-older-than 7d && brew cleanup --prune=7 ;;
+  Linux) nix-collect-garbage --delete-older-than 7d ;;
+  *) echo "unsupported OS: $(uname)" >&2; exit 1 ;;
+esac
+'''
 
 [tasks.fmt]
 description = "Format all Nix files"
