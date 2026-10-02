@@ -39,7 +39,6 @@
       "podman"
       "riscv-software-src/riscv/riscv-tools"
       "unisonweb/unison/unison-language"
-      "zlib"
     ];
 
     casks = [
