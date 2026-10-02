@@ -35,7 +35,6 @@ lib.mkMerge [
         source ${homeDir}/.opam/opam-init/init.fish &>/dev/null
       '';
       shellAbbrs = {
-        ls = "eza --all --icons auto";
         cat = "bat";
         restart = "exec $SHELL -l";
       };

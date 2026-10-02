@@ -8,10 +8,9 @@
   programs.ripgrep.enable = true;
   programs.tealdeer.enable = true;
 
-  programs.eza = {
+  programs.lsd = {
     enable = true;
-    # `ls` is an abbreviation in shell.nix.
-    enableFishIntegration = false;
+    enableFishIntegration = true;
   };
 
   programs.lazygit = {
