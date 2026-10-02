@@ -38,6 +38,10 @@ run = "juliaup self update && juliaup update"
 description = "Upgrade the packages in the current opam switch"
 run = "opam update && opam upgrade --yes"
 
+[tasks.gc]
+description = "Delete generations and Homebrew downloads older than 7 days, then collect garbage"
+run = ["sudo nix-collect-garbage --delete-older-than 7d", "brew cleanup --prune=7"]
+
 [tasks.fmt]
 description = "Format all Nix files"
 run = "nix fmt"
