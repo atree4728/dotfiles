@@ -20,7 +20,6 @@
         })
         [
           "abue-ammar/tinycast"
-          "felixkratz/formulae"
           "laishulu/homebrew"
           "nikitabobko/tap"
           "riscv-software-src/riscv"
@@ -28,7 +27,6 @@
         ];
 
     brews = [
-      "felixkratz/formulae/borders"
       "gcc"
       "laishulu/homebrew/macism"
       "llvm"

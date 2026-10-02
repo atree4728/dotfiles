@@ -36,6 +36,13 @@
     udev-gothic-nf
   ];
 
+  services.jankyborders = {
+    enable = true;
+    active_color = "0xffe1e3e4";
+    inactive_color = "0xff494d64";
+    width = 10.0;
+  };
+
   security.pam.services.sudo_local.touchIdAuth = true;
 
   system.defaults = {
