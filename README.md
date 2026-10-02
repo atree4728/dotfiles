@@ -15,6 +15,8 @@ macOS environment managed with nix-darwin and home-manager.
 sudo mv /etc/nix/nix.custom.conf{,.before-nix-darwin}
 
 sudo nix run --inputs-from . nix-darwin -- switch --flake .#Ree
+
+chsh -s /run/current-system/sw/bin/fish
 ```
 
 ## Usage
@@ -29,3 +31,9 @@ mise run vscode-extensions  # once per machine
 ```
 
 Homebrew packages that are not declared in `nix/homebrew.nix` are uninstalled by `mise run apply`, so declare a formula or cask there instead of running `brew install`.
+
+## Recovery
+
+- The login shell is the fish installed by Nix, so it does not start when Nix is broken. Open Terminal.app, choose Profiles > Shell > Startup > Run command and run `/bin/zsh`.
+- `sudo darwin-rebuild --rollback` switches back to the previous generation.
+- When a managed file already exists, home-manager moves it to `<name>.hm-backup`, and `mise run apply` fails if that backup already exists. Check the backup, delete it and apply again.
