@@ -35,6 +35,7 @@
       "llvm"
       "make"
       "opam"
+      "pkgconf"
       "podman"
       "riscv-software-src/riscv/riscv-tools"
       "unisonweb/unison/unison-language"
