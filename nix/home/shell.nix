@@ -74,7 +74,7 @@ lib.mkMerge [
     programs.starship.enable = true;
     programs.zoxide.enable = true;
   }
-  (lib.mkIf pkgs.stdenv.isDarwin {
+  (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     home.sessionPath = [
       "/opt/oss-cad-suite/bin"
       "/opt/homebrew/opt/llvm/bin"

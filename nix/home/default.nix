@@ -72,7 +72,7 @@ in
 
       home.stateVersion = "26.11";
     }
-    (lib.mkIf pkgs.stdenv.isDarwin {
+    (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       xdg.configFile =
         lib.genAttrs
           [
