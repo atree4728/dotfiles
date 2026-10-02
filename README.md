@@ -31,11 +31,11 @@ mise run vscode-extensions  # once per machine
 ```
 
 ```sh
-mise run upgrade  # update flake.lock, apply, then upgrade everything outside Nix
+mise run upgrade  # update flake.lock, apply, upgrade everything outside Nix, then commit the lock files
 mise run gc       # delete generations older than 7 days
 ```
 
-`mise run upgrade` stops at the first failing step; `mise run -c upgrade` continues past it, and each step can be run alone (`mise run upgrade:brew`). Commit `flake.lock` afterwards. If the build fails after the update, `git restore flake.lock` undoes it.
+`mise run upgrade` stops at the first failing step; `mise run -c upgrade` continues past it, and each step can be run alone (`mise run upgrade:brew`). It ends with `mise run lock`, which commits `flake.lock` and `config/nvim/lazy-lock.json` and nothing else; run it by hand after a step that was run alone. If the build fails after the update, `flake.lock` is restored.
 
 Homebrew packages that are not declared in `nix/homebrew.nix` are uninstalled by `mise run apply`, so declare a formula or cask there instead of running `brew install`.
 

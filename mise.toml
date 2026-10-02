@@ -28,11 +28,21 @@ run = [
   { task = "upgrade:juliaup" },
   { task = "upgrade:opam" },
   { task = "upgrade:nvim" },
+  { task = "lock" },
 ]
 
+[tasks.lock]
+description = "Commit flake.lock and config/nvim/lazy-lock.json if they changed"
+run = "git diff --quiet HEAD -- flake.lock config/nvim/lazy-lock.json || git commit -m 'chore: update lock files' -- flake.lock config/nvim/lazy-lock.json"
+
 [tasks."upgrade:nix"]
-description = "Update the flake inputs and activate the result"
-run = [{ task = "update" }, { task = "build" }, { task = "diff" }, { task = "apply" }]
+description = "Update the flake inputs and activate the result; a failing build restores flake.lock"
+run = [
+  { task = "update" },
+  "mise run build || { git restore flake.lock; exit 1; }",
+  { task = "diff" },
+  { task = "apply" },
+]
 
 [tasks."upgrade:determinate"]
 description = "Upgrade Determinate Nix"
