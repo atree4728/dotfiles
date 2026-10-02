@@ -14,6 +14,7 @@ in
     ./git.nix
     ./shell.nix
     ./ssh.nix
+    ./topgrade.nix
   ];
 
   config = lib.mkMerge [

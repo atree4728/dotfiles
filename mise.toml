@@ -15,21 +15,8 @@ description = "Update the flake inputs in flake.lock"
 run = "nix flake update"
 
 [tasks.upgrade]
-description = "Upgrade everything; pass -c to continue past a failing step"
-run = [
-  { task = "upgrade:nix" },
-  { task = "upgrade:determinate" },
-  { task = "upgrade:mas" },
-  { task = "upgrade:brew" },
-  { task = "upgrade:mise" },
-  { task = "upgrade:rustup" },
-  { task = "upgrade:ghcup" },
-  { task = "upgrade:elan" },
-  { task = "upgrade:juliaup" },
-  { task = "upgrade:opam" },
-  { task = "upgrade:nvim" },
-  { task = "lock" },
-]
+description = "Upgrade everything with topgrade, configured in nix/home/topgrade.nix"
+run = "topgrade"
 
 [tasks.lock]
 description = "Commit flake.lock and config/nvim/lazy-lock.json if they changed"
@@ -44,49 +31,9 @@ run = [
   { task = "apply" },
 ]
 
-[tasks."upgrade:determinate"]
-description = "Upgrade Determinate Nix"
-run = "sudo determinate-nixd upgrade"
-
-[tasks."upgrade:mas"]
-description = "Upgrade the Mac App Store apps"
-run = "sudo mas upgrade"
-
-[tasks."upgrade:brew"]
-description = "Upgrade the Homebrew formulae and casks"
-run = "brew update && brew upgrade --yes"
-
-[tasks."upgrade:mise"]
-description = "Upgrade the tools in the global mise config"
-run = "mise upgrade"
-
-[tasks."upgrade:rustup"]
-description = "Upgrade rustup and the Rust toolchains"
-run = "rustup update"
-
-[tasks."upgrade:ghcup"]
-description = "Upgrade ghcup"
-run = "ghcup upgrade"
-
-[tasks."upgrade:elan"]
-description = "Upgrade elan"
-run = "elan self update"
-
-[tasks."upgrade:juliaup"]
-description = "Upgrade juliaup and Julia"
-run = "juliaup self update && juliaup update"
-
-[tasks."upgrade:opam"]
-description = "Upgrade the packages in the current opam switch"
-run = "opam update && opam upgrade --yes"
-
 [tasks.gc]
 description = "Delete generations and Homebrew downloads older than 7 days, then collect garbage"
 run = ["sudo nix-collect-garbage --delete-older-than 7d", "brew cleanup --prune=7"]
-
-[tasks."upgrade:nvim"]
-description = "Upgrade the Neovim plugins and config/nvim/lazy-lock.json"
-run = "nvim --headless '+Lazy! update' +qa"
 
 [tasks.fmt]
 description = "Format all Nix files"
