@@ -82,7 +82,6 @@ lib.mkMerge [
     home.sessionPath = [
       "/opt/oss-cad-suite/bin"
       "/opt/homebrew/opt/llvm/bin"
-      "/Applications/Ghostty.app/Contents/MacOS"
     ];
 
     programs.fish.loginShellInit = lib.mkBefore ''

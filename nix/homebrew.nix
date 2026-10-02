@@ -39,7 +39,6 @@
       "arc"
       "discord"
       "gcloud-cli"
-      "ghostty"
       "google-chrome"
       "guitar-pro"
       "karabiner-elements"
