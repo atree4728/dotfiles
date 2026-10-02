@@ -131,6 +131,8 @@ in
     ];
   };
 
+  programs.zsh.enable = true;
+
   programs.fzf = {
     enable = true;
     # fzf.fish binds the same keys.
