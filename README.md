@@ -30,10 +30,18 @@ mise run apply
 mise run vscode-extensions  # once per machine
 ```
 
+```sh
+mise run upgrade  # update flake.lock, apply, then upgrade everything outside Nix
+mise run gc       # delete generations older than 7 days
+```
+
+`mise run upgrade` stops at the first failing step; `mise run -c upgrade` continues past it, and each step can be run alone (`mise run upgrade:brew`). Commit `flake.lock` afterwards. If the build fails after the update, `git restore flake.lock` undoes it.
+
 Homebrew packages that are not declared in `nix/homebrew.nix` are uninstalled by `mise run apply`, so declare a formula or cask there instead of running `brew install`.
 
 ## Recovery
 
 - The login shell is the fish installed by Nix, so it does not start when Nix is broken. Open Terminal.app, choose Profiles > Shell > Startup > Run command and run `/bin/zsh`.
 - `sudo darwin-rebuild --rollback` switches back to the previous generation.
+- After a major macOS update, run `mise run apply` again; the update can overwrite `/etc/zshrc` and drop the Nix initialisation.
 - When a managed file already exists, home-manager moves it to `<name>.hm-backup`, and `mise run apply` fails if that backup already exists. Check the backup, delete it and apply again.
