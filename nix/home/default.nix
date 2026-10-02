@@ -14,6 +14,7 @@ in
     ./git.nix
     ./shell.nix
     ./ssh.nix
+    ./tools.nix
     ./topgrade.nix
   ];
 
@@ -24,37 +25,26 @@ in
       home.packages = with pkgs; [
         awscli2
         bashInteractive
-        bat
-        bottom
         cmake
         coreutils-prefixed
         dafny
         dust
-        eza
-        fastfetch
-        fd
         ffmpeg
         ghq
         glow
         gnumake
-        htop
         hyperfine
         imagemagick
         iverilog
-        jq
-        lazygit
         neovim
         poppler-utils
         procs
         qemu
         rip2
-        ripgrep
         (rocq-core.withPackages (ps: [ ps.stdlib ]))
         swi-prolog
-        tealdeer
         typst
         wget
-        yazi
         llm-agents.packages.${stdenv.hostPlatform.system}.claude-code
       ];
 
@@ -62,10 +52,8 @@ in
         lib.genAttrs
           [
             "glow"
-            "lazygit"
             "mise/config.toml"
             "nvim"
-            "starship.toml"
           ]
           (path: {
             source = link path;

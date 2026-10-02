@@ -1,3 +1,0 @@
-git:
-  diffRenderers:
-    - command: delta --dark --paging=never

@@ -39,14 +39,6 @@ lib.mkMerge [
         cat = "bat";
         restart = "exec $SHELL -l";
       };
-      functions.y = ''
-        set tmp (mktemp -t "yazi-cwd.XXXXXX")
-        command yazi $argv --cwd-file="$tmp"
-        if read -z cwd <"$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
-          builtin cd -- "$cwd"
-        end
-        command rm -f -- "$tmp"
-      '';
       functions.ghq_cd = ''
         set repo (ghq list --full-path | fzf --query=(commandline --current-buffer))
         and cd -- $repo
@@ -72,7 +64,13 @@ lib.mkMerge [
       enableFishIntegration = false;
     };
     programs.mise.enable = true;
-    programs.starship.enable = true;
+    programs.starship = {
+      enable = true;
+      settings = {
+        aws.disabled = true;
+        gcloud.disabled = true;
+      };
+    };
     programs.zoxide.enable = true;
   }
   (lib.mkIf isDarwin {
