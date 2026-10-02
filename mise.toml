@@ -33,7 +33,10 @@ run = [
 
 [tasks.gc]
 description = "Delete generations and Homebrew downloads older than 7 days, then collect garbage"
-run = ["sudo nix-collect-garbage --delete-older-than 7d", "brew cleanup --prune=7"]
+run = [
+  "sudo nix-collect-garbage --delete-older-than 7d",
+  "brew cleanup --prune=7",
+]
 
 [tasks.fmt]
 description = "Format all Nix files"
@@ -41,7 +44,7 @@ run = "nix fmt"
 
 [tasks.check]
 description = "Evaluate the flake outputs"
-run = "nix flake check"
+run = "nix flake check --impure"
 
 [tasks.pre-commit]
 description = "Fail if any Nix file is not formatted"

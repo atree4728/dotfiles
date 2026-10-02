@@ -53,7 +53,6 @@ in
         swi-prolog
         tealdeer
         typst
-        verilator
         wget
         yazi
         llm-agents.packages.${stdenv.hostPlatform.system}.claude-code
@@ -77,7 +76,10 @@ in
       home.stateVersion = "26.11";
     }
     (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-      home.packages = [ pkgs.mas ];
+      home.packages = with pkgs; [
+        mas
+        verilator
+      ];
 
       xdg.configFile =
         lib.genAttrs
@@ -89,6 +91,9 @@ in
           (path: {
             source = link path;
           });
+    })
+    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      targets.genericLinux.enable = true;
     })
   ];
 }

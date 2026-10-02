@@ -1,5 +1,5 @@
 {
-  description = "atree's macOS environment";
+  description = "atree's environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -26,14 +26,13 @@
       ...
     }:
     let
-      system = "aarch64-darwin";
       username = "atree";
     in
     {
       darwinConfigurations.mac = nix-darwin.lib.darwinSystem {
         modules = [
           determinate.darwinModules.default
-          { nixpkgs.hostPlatform = system; }
+          { nixpkgs.hostPlatform = "aarch64-darwin"; }
           ./nix/darwin.nix
           ./nix/homebrew.nix
           home-manager.darwinModules.home-manager
@@ -51,6 +50,23 @@
         ];
       };
 
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
+      # Needs `--impure`: the user name and the architecture come from the environment.
+      homeConfigurations.linux = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
+        extraSpecialArgs = { inherit llm-agents; };
+        modules = [
+          ./nix/home
+          {
+            home.username = builtins.getEnv "USER";
+            home.homeDirectory = builtins.getEnv "HOME";
+          }
+        ];
+      };
+
+      formatter = nixpkgs.lib.genAttrs [
+        "aarch64-darwin"
+        "x86_64-linux"
+        "aarch64-linux"
+      ] (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
     };
 }

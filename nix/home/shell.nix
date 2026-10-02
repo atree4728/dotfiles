@@ -5,12 +5,13 @@
   ...
 }:
 let
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
   homeDir = config.home.homeDirectory;
   nixPath = [
-    "/etc/profiles/per-user/${config.home.username}/bin"
-    "/run/current-system/sw/bin"
-    "/nix/var/nix/profiles/default/bin"
-  ];
+    "${config.home.profileDirectory}/bin"
+  ]
+  ++ lib.optional isDarwin "/run/current-system/sw/bin"
+  ++ [ "/nix/var/nix/profiles/default/bin" ];
 in
 lib.mkMerge [
   {
@@ -68,14 +69,13 @@ lib.mkMerge [
     };
     programs.fzf = {
       enable = true;
-      # fzf.fish binds the same keys.
       enableFishIntegration = false;
     };
     programs.mise.enable = true;
     programs.starship.enable = true;
     programs.zoxide.enable = true;
   }
-  (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+  (lib.mkIf isDarwin {
     home.sessionPath = [
       "/opt/oss-cad-suite/bin"
       "/opt/homebrew/opt/llvm/bin"
@@ -87,5 +87,15 @@ lib.mkMerge [
       /opt/homebrew/bin/brew shellenv fish | source
       fish_add_path --global --move --append --path ${homeDir}/.orbstack/bin
     '';
+  })
+  (lib.mkIf isLinux {
+    programs.bash = {
+      enable = true;
+      initExtra = ''
+        if [[ $(ps --no-header --pid=$PPID --format=comm) != fish && -z $BASH_EXECUTION_STRING ]]; then
+          exec fish -l
+        fi
+      '';
+    };
   })
 ]
