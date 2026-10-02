@@ -27,11 +27,10 @@
     }:
     let
       system = "aarch64-darwin";
-      hostname = "Ree";
       username = "atree";
     in
     {
-      darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.mac = nix-darwin.lib.darwinSystem {
         modules = [
           determinate.darwinModules.default
           { nixpkgs.hostPlatform = system; }
@@ -39,10 +38,6 @@
           ./nix/homebrew.nix
           home-manager.darwinModules.home-manager
           {
-            networking = {
-              hostName = hostname;
-              computerName = hostname;
-            };
             system.primaryUser = username;
             users.users.${username}.home = "/Users/${username}";
             home-manager = {

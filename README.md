@@ -14,7 +14,7 @@ macOS environment managed with nix-darwin and home-manager.
 # nix-darwin manages this file and refuses to overwrite the installer's copy
 sudo mv /etc/nix/nix.custom.conf{,.before-nix-darwin}
 
-sudo nix run --inputs-from . nix-darwin -- switch --flake .#Ree
+sudo nix run --inputs-from . nix-darwin -- switch --flake .#mac
 
 chsh -s /run/current-system/sw/bin/fish
 ```
