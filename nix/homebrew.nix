@@ -20,21 +20,15 @@
         })
         [
           "abue-ammar/tinycast"
-          "laishulu/homebrew"
           "nikitabobko/tap"
           "riscv-software-src/riscv"
-          "unisonweb/unison"
         ];
 
     brews = [
       "gcc"
-      "laishulu/homebrew/macism"
       "llvm"
-      "opam"
-      "pkgconf"
       "podman"
       "riscv-software-src/riscv/riscv-tools"
-      "unisonweb/unison/unison-language"
     ];
 
     casks = [

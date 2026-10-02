@@ -54,6 +54,12 @@ lib.mkMerge [
 
     programs.zsh.enable = true;
 
+    # opam's own init script also hooks the prompt, so the plain `opam env` integration is off.
+    programs.opam = {
+      enable = true;
+      enableFishIntegration = false;
+    };
+
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;

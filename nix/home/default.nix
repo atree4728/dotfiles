@@ -37,6 +37,7 @@ in
         imagemagick
         iverilog
         neovim
+        pkgconf
         poppler-utils
         procs
         qemu
@@ -44,6 +45,7 @@ in
         (rocq-core.withPackages (ps: [ ps.stdlib ]))
         swi-prolog
         typst
+        unison-ucm
         wget
         llm-agents.packages.${stdenv.hostPlatform.system}.claude-code
       ];
@@ -65,6 +67,7 @@ in
     }
     (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       home.packages = with pkgs; [
+        macism
         mas
         verilator
       ];
