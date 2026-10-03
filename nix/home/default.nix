@@ -5,8 +5,7 @@
   ...
 }:
 let
-  repo = "${config.home.homeDirectory}/src/github.com/atree4728/dotfiles";
-  link = path: config.lib.file.mkOutOfStoreSymlink "${repo}/config/${path}";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${config.dotfiles.dir}/config/${path}";
 in
 {
   imports = [
@@ -16,6 +15,12 @@ in
     ./tools.nix
     ./topgrade.nix
   ];
+
+  options.dotfiles.dir = lib.mkOption {
+    type = lib.types.str;
+    default = "${config.home.homeDirectory}/src/github.com/atree4728/dotfiles";
+    description = "Absolute path of the working tree of this repository; `config/` is symlinked from it.";
+  };
 
   config = lib.mkMerge [
     {
