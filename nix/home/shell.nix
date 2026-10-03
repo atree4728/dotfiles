@@ -32,7 +32,6 @@ lib.mkMerge [
       loginShellInit = ''
         fish_add_path --global --move --path ${toString nixPath}
         fish_add_path --global --move --path ${toString config.home.sessionPath}
-        source ${homeDir}/.opam/opam-init/init.fish &>/dev/null
       '';
       shellAbbrs = {
         cat = "bat";
@@ -54,11 +53,7 @@ lib.mkMerge [
 
     programs.zsh.enable = true;
 
-    # opam's own init script also hooks the prompt, so the plain `opam env` integration is off.
-    programs.opam = {
-      enable = true;
-      enableFishIntegration = false;
-    };
+    programs.opam.enable = true;
 
     programs.direnv = {
       enable = true;
