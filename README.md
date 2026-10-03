@@ -9,16 +9,17 @@ Clone this repository to `~/src/github.com/atree4728/dotfiles` on either system;
 ### macOS
 
 1. Install Xcode Command Line Tools: `xcode-select --install`
-2. Install [Determinate Nix](https://docs.determinate.systems/).
+2. Install Nix with [NixOS/nix-installer](https://github.com/NixOS/nix-installer): `curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install`.
 3. Install [Homebrew](https://brew.sh/).
 4. Sign in to the App Store (apps from it are installed during activation).
 5. Clone this repository and run the following in it.
 
 ```sh
 # nix-darwin manages this file and refuses to overwrite the installer's copy
-sudo mv /etc/nix/nix.custom.conf{,.before-nix-darwin}
+sudo mv /etc/nix/nix.conf{,.before-nix-darwin}
 
-sudo nix run --inputs-from . nix-darwin -- switch --flake .#mac
+# The installer does not enable flakes; nix-darwin does from the next run on.
+sudo nix --extra-experimental-features 'nix-command flakes' run --inputs-from . nix-darwin -- switch --flake .#mac
 
 chsh -s /run/current-system/sw/bin/fish
 ```
@@ -63,5 +64,6 @@ On macOS, VS Code is only installed from here; its settings, keybindings and ext
 - On macOS, the login shell is the fish installed by Nix, so it does not start when Nix is broken. Open Terminal.app, choose Profiles > Shell > Startup > Run command and run `/bin/zsh`.
 - On Linux, the login shell is still bash; when fish is broken, run `bash --norc`.
 - `sudo darwin-rebuild --rollback` switches macOS back to the previous generation.
+- To remove Nix on macOS, change the login shell to `/bin/zsh` first (fish, git and mise come from Nix), uninstall nix-darwin with `sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller`, and only then run `/nix/nix-installer uninstall`. The other order leaves a broken SSL certificate link and the nix-darwin uninstaller can no longer run.
 - After a major macOS update, run `mise run apply` again; the update can overwrite `/etc/zshrc` and drop the Nix initialisation.
 - When a managed file already exists, home-manager moves it to `<name>.hm-backup`, and `mise run apply` fails if that backup already exists. Check the backup, delete it and apply again. On Ubuntu, the first activation moves the stock `~/.bashrc` and `~/.profile` to `~/.bashrc.hm-backup` and `~/.profile.hm-backup`.
