@@ -47,6 +47,6 @@ mise run apply                    # macOS: after a major update, which can drop 
 
 ```sh
 chsh -s /bin/zsh
-sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller
+sudo nix run nix-darwin#darwin-uninstaller
 /nix/nix-installer uninstall
 ```
