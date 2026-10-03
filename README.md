@@ -1,72 +1,52 @@
 # dotfiles
 
-macOS and Linux (WSL) environments managed with nix-darwin and home-manager.
+macOS (nix-darwin + home-manager) and Linux on WSL (home-manager).
 
-## Bootstrap
+## Install
 
-Clone this repository to `~/src/github.com/atree4728/dotfiles` on either system; files under `config/` are symlinked from this path.
-
-### macOS
-
-1. Install Xcode Command Line Tools: `xcode-select --install`
-2. Install Nix with [NixOS/nix-installer](https://github.com/NixOS/nix-installer): `curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install`.
-3. Install [Homebrew](https://brew.sh/).
-4. Sign in to the App Store (apps from it are installed during activation).
-5. Clone this repository and run the following in it.
+Prerequisites: on macOS, sign in to the App Store; on WSL, set `systemd=true` under `[boot]` in `/etc/wsl.conf` and restart the distribution.
 
 ```sh
-# nix-darwin manages this file and refuses to overwrite the installer's copy
-sudo mv /etc/nix/nix.conf{,.before-nix-darwin}
+# macOS only
+xcode-select --install
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# The installer does not enable flakes; nix-darwin does from the next run on.
-sudo nix --extra-experimental-features 'nix-command flakes' run --inputs-from . nix-darwin -- switch --flake .#mac
-
-chsh -s /run/current-system/sw/bin/fish
+# `config/` is symlinked from this path
+git clone https://github.com/atree4728/dotfiles ~/src/github.com/atree4728/dotfiles
+cd ~/src/github.com/atree4728/dotfiles
+./install.sh
 ```
 
-### Linux (Ubuntu on WSL)
-
-1. Enable systemd in WSL (`systemd=true` under `[boot]` in `/etc/wsl.conf`) and restart the distribution.
-2. Install Nix with [NixOS/nix-installer](https://github.com/NixOS/nix-installer): `curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install`.
-3. Clone this repository.
-4. Run the following in it, then open a new shell.
-
-```sh
-# The installer does not enable flakes; home-manager does from the next run on.
-nix --extra-experimental-features 'nix-command flakes' run --inputs-from . home-manager -- switch --impure -b hm-backup --flake .#linux
-```
-
-The user name and the architecture are read from the environment, hence `--impure`. The login shell stays bash, which starts fish; run `bash` from fish to get a bash prompt.
-
-Only the command-line tools from Nix are set up. Homebrew packages, GUI applications, fonts, the 1Password SSH agent and verilator are macOS only. The tasks do not install the tools listed in `config/mise/config.toml`; `mise install` and the mise step of `mise run upgrade` need rustup and a C compiler (`sudo apt install build-essential`).
+Open a new shell afterwards. Linux gets the command-line tools only; `mise install` additionally needs `sudo apt install build-essential`.
 
 ## Usage
-
-Tasks are run with [mise](https://mise.jdx.dev/); `mise tasks` lists them.
 
 ```sh
 mise trust
 mise generate git-pre-commit --write --task=pre-commit  # once per clone
+mise tasks                                              # list tasks
 mise run apply
+mise run upgrade                                        # flake.lock, topgrade, gc, then commit lock files
 ```
 
-```sh
-mise run upgrade  # update flake.lock, apply, upgrade everything outside Nix, collect garbage, then commit the lock files
-mise run gc       # delete generations older than 7 days; upgrade runs it too
-```
-
-`mise run upgrade` runs [topgrade](https://github.com/topgrade-rs/topgrade), configured in `nix/home/topgrade.nix`; when a step fails it asks whether to retry, skip or quit, and each step can be run alone (`topgrade --only rustup`). It ends with `mise run gc` and `mise run lock`; the latter commits `flake.lock` and `config/nvim/lazy-lock.json` and nothing else; run it by hand after a step that was run alone. If the build fails after the update, `flake.lock` is restored.
-
-On macOS, Homebrew packages that are not declared in `nix/darwin/homebrew.nix` are uninstalled by `mise run apply`, so declare a formula or cask there instead of running `brew install`.
-
-On macOS, VS Code is only installed from here; its settings, keybindings and extensions are kept by its own Settings Sync, so sign in to it once per machine.
+- Homebrew packages not declared in `nix/darwin/homebrew.nix` are uninstalled by `mise run apply`; do not `brew install`.
+- VS Code is only installed from here; sign in to its Settings Sync.
 
 ## Recovery
 
-- On macOS, the login shell is the fish installed by Nix, so it does not start when Nix is broken. Open Terminal.app, choose Profiles > Shell > Startup > Run command and run `/bin/zsh`.
-- On Linux, the login shell is still bash; when fish is broken, run `bash --norc`.
-- `sudo darwin-rebuild --rollback` switches macOS back to the previous generation.
-- To remove Nix on macOS, change the login shell to `/bin/zsh` first (fish, git and mise come from Nix), uninstall nix-darwin with `sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller`, and only then run `/nix/nix-installer uninstall`. The other order leaves a broken SSL certificate link and the nix-darwin uninstaller can no longer run.
-- To remove Nix on Linux, run `/nix/nix-installer uninstall`.
-- After a major macOS update, run `mise run apply` again; the update can overwrite `/etc/zshrc` and drop the Nix initialisation.
-- When a managed file already exists, home-manager moves it to `<name>.hm-backup`, and `mise run apply` fails if that backup already exists. Check the backup, delete it and apply again. On Ubuntu, the first activation moves the stock `~/.bashrc` and `~/.profile` to `~/.bashrc.hm-backup` and `~/.profile.hm-backup`.
+```sh
+bash --norc                       # Linux: fish is broken
+sudo darwin-rebuild --rollback    # macOS: previous generation
+rm ~/<name>.hm-backup             # apply fails because a backup exists; check it first
+mise run apply                    # macOS: after a major update, which can drop the Nix init from /etc/zshrc
+```
+
+- macOS, fish is broken: Terminal.app > Profiles > Shell > Startup > Run command: `/bin/zsh`.
+- Uninstall on Linux: `/nix/nix-installer uninstall`.
+- Uninstall on macOS: change the login shell to `/bin/zsh` first, then run the following in this order; reversing it breaks the SSL certificate link and the nix-darwin uninstaller.
+
+```sh
+chsh -s /bin/zsh
+sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller
+/nix/nix-installer uninstall
+```

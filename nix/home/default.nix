@@ -26,8 +26,7 @@ in
     {
       xdg.enable = true;
 
-      # Building the man page evaluates every option declaration, which trips
-      # the "options.json ... without a proper context" warning of Nix.
+      # Building the man page trips the "options.json ... without a proper context" warning.
       manual.manpages.enable = false;
 
       xdg.configFile =
@@ -59,7 +58,7 @@ in
     (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       targets.genericLinux.enable = true;
 
-      # The installer does not enable flakes; this writes ~/.config/nix/nix.conf.
+      # The installer does not enable flakes.
       nix = {
         package = pkgs.nix;
         settings.experimental-features = [
