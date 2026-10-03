@@ -9,6 +9,20 @@
       init.defaultBranch = "main";
       core.pager = "delta";
       merge.conflictStyle = "zdiff3";
+      diff = {
+        algorithm = "histogram";
+        colorMoved = "default";
+      };
+      fetch.prune = true;
+      pull.ff = "only";
+      push.autoSetupRemote = true;
+      rebase = {
+        autoSquash = true;
+        autoStash = true;
+      };
+      rerere.enabled = true;
+      branch.sort = "-committerdate";
+      commit.verbose = true;
       ghq.root = "~/src";
     };
     ignores = [
