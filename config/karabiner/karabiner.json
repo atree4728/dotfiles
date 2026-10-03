@@ -21,7 +21,7 @@
                                         "optional": ["any"]
                                     }
                                 },
-                                "to": [{ "shell_command": "/opt/homebrew/bin/macism com.apple.keylayout.UnicodeHexInput" }],
+                                "to": [{ "shell_command": "/etc/profiles/per-user/atree/bin/macism com.apple.keylayout.UnicodeHexInput" }],
                                 "type": "basic"
                             }
                         ]
@@ -43,7 +43,7 @@
                                         "optional": ["any"]
                                     }
                                 },
-                                "to": [{ "shell_command": "/opt/homebrew/bin/macism net.mtgto.inputmethod.macSKK.hiragana" }],
+                                "to": [{ "shell_command": "/etc/profiles/per-user/atree/bin/macism net.mtgto.inputmethod.macSKK.hiragana" }],
                                 "type": "basic"
                             }
                         ]
