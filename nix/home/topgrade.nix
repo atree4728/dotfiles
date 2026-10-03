@@ -1,4 +1,9 @@
-{ config, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   programs.topgrade = {
     enable = true;
@@ -22,10 +27,14 @@
       };
       # The mise step fails on `mise self-update`, which the Nix build of mise rejects.
       commands.mise = "mise upgrade";
-      pre_commands = {
-        "Determinate Nix" = "sudo determinate-nixd upgrade";
-        "Nix configuration" = "mise -C ${config.dotfiles.dir} run upgrade:nix";
-      };
+      pre_commands =
+        lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+          # Linux still runs Determinate Nix; on macOS nix-darwin upgrades Nix with the flake.
+          "Determinate Nix" = "sudo determinate-nixd upgrade";
+        }
+        // {
+          "Nix configuration" = "mise -C ${config.dotfiles.dir} run upgrade:nix";
+        };
       post_commands = {
         "Garbage collection" = "mise -C ${config.dotfiles.dir} run gc";
         "Lock files" = "mise -C ${config.dotfiles.dir} run lock";
