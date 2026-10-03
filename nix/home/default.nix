@@ -58,6 +58,15 @@ in
     })
     (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       targets.genericLinux.enable = true;
+
+      # The installer does not enable flakes; this writes ~/.config/nix/nix.conf.
+      nix = {
+        package = pkgs.nix;
+        settings.experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+      };
     })
   ];
 }

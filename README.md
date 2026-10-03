@@ -26,12 +26,14 @@ chsh -s /run/current-system/sw/bin/fish
 
 ### Linux (Ubuntu on WSL)
 
-1. Install [Determinate Nix](https://docs.determinate.systems/).
-2. Clone this repository.
-3. Run the following in it, then open a new shell.
+1. Enable systemd in WSL (`systemd=true` under `[boot]` in `/etc/wsl.conf`) and restart the distribution.
+2. Install Nix with [NixOS/nix-installer](https://github.com/NixOS/nix-installer): `curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install`.
+3. Clone this repository.
+4. Run the following in it, then open a new shell.
 
 ```sh
-nix run --inputs-from . home-manager -- switch --impure -b hm-backup --flake .#linux
+# The installer does not enable flakes; home-manager does from the next run on.
+nix --extra-experimental-features 'nix-command flakes' run --inputs-from . home-manager -- switch --impure -b hm-backup --flake .#linux
 ```
 
 The user name and the architecture are read from the environment, hence `--impure`. The login shell stays bash, which starts fish; run `bash` from fish to get a bash prompt.
@@ -65,5 +67,6 @@ On macOS, VS Code is only installed from here; its settings, keybindings and ext
 - On Linux, the login shell is still bash; when fish is broken, run `bash --norc`.
 - `sudo darwin-rebuild --rollback` switches macOS back to the previous generation.
 - To remove Nix on macOS, change the login shell to `/bin/zsh` first (fish, git and mise come from Nix), uninstall nix-darwin with `sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller`, and only then run `/nix/nix-installer uninstall`. The other order leaves a broken SSL certificate link and the nix-darwin uninstaller can no longer run.
+- To remove Nix on Linux, run `/nix/nix-installer uninstall`.
 - After a major macOS update, run `mise run apply` again; the update can overwrite `/etc/zshrc` and drop the Nix initialisation.
 - When a managed file already exists, home-manager moves it to `<name>.hm-backup`, and `mise run apply` fails if that backup already exists. Check the backup, delete it and apply again. On Ubuntu, the first activation moves the stock `~/.bashrc` and `~/.profile` to `~/.bashrc.hm-backup` and `~/.profile.hm-backup`.
