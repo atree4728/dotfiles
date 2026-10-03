@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  llm-agents,
   ...
 }:
 let
@@ -14,7 +13,6 @@ in
     ./ghostty.nix
     ./git.nix
     ./shell.nix
-    ./ssh.nix
     ./tools.nix
     ./topgrade.nix
   ];
@@ -26,34 +24,6 @@ in
       # Building the man page evaluates every option declaration, which trips
       # the "options.json ... without a proper context" warning of Nix.
       manual.manpages.enable = false;
-
-      home.packages = with pkgs; [
-        awscli2
-        bashInteractive
-        cmake
-        coreutils-prefixed
-        dafny
-        dust
-        ffmpeg
-        ghq
-        glow
-        gnumake
-        hyperfine
-        imagemagick
-        iverilog
-        neovim
-        pkgconf
-        poppler-utils
-        procs
-        qemu
-        rip2
-        (rocq-core.withPackages (ps: [ ps.stdlib ]))
-        swi-prolog
-        typst
-        unison-ucm
-        wget
-        llm-agents.packages.${stdenv.hostPlatform.system}.claude-code
-      ];
 
       xdg.configFile =
         lib.genAttrs
@@ -71,12 +41,6 @@ in
       home.stateVersion = "26.11";
     }
     (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-      home.packages = with pkgs; [
-        macism
-        mas
-        verilator
-      ];
-
       xdg.configFile =
         lib.genAttrs
           [
