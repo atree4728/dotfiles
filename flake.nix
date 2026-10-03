@@ -11,7 +11,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
     # No `follows`: upstream builds and tests against its own nixpkgs pin.
     llm-agents.url = "github:numtide/llm-agents.nix";
   };
@@ -21,7 +20,6 @@
       nixpkgs,
       nix-darwin,
       home-manager,
-      determinate,
       llm-agents,
       ...
     }:
@@ -31,7 +29,6 @@
     {
       darwinConfigurations.mac = nix-darwin.lib.darwinSystem {
         modules = [
-          determinate.darwinModules.default
           { nixpkgs.hostPlatform = "aarch64-darwin"; }
           ./nix/darwin
           home-manager.darwinModules.home-manager
