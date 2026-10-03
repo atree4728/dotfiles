@@ -10,14 +10,21 @@
       NSAutomaticPeriodSubstitutionEnabled = false;
       NSAutomaticSpellingCorrectionEnabled = false;
       NSAutomaticWindowAnimationsEnabled = false;
+      AppleShowAllExtensions = true;
     };
     WindowManager.EnableTiledWindowMargins = false;
     dock = {
       autohide = true;
       expose-group-apps = true;
+      show-recents = false;
       wvous-br-corner = 1;
     };
-    finder.AppleShowAllFiles = true;
+    finder = {
+      AppleShowAllFiles = true;
+      FXEnableExtensionChangeWarning = false;
+      FXPreferredViewStyle = "clmv";
+      ShowPathbar = true;
+    };
     menuExtraClock.ShowSeconds = true;
   };
 

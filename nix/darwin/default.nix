@@ -9,6 +9,7 @@
     "nix-command"
     "flakes"
   ];
+  nix.optimise.automatic = true;
 
   programs.fish = {
     enable = true;
