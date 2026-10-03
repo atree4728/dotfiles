@@ -68,9 +68,10 @@ description = "Format all Nix files"
 run = "nix fmt"
 
 [tasks.check]
-description = "Evaluate the flake outputs, and the Linux configuration for x86_64-linux"
+description = "Evaluate the flake outputs, the macOS configuration, and the Linux configuration for x86_64-linux"
 run = [
   "nix flake check --impure",
+  "nix eval .#darwinConfigurations.mac.system.drvPath > /dev/null",
   "nix eval --impure --system x86_64-linux --raw .#homeConfigurations.linux.activationPackage.drvPath > /dev/null",
 ]
 
