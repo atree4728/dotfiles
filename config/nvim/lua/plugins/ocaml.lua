@@ -35,8 +35,6 @@ return {
   {
     "tarides/ocaml.nvim",
     ft = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
-    opts = function()
-      require("ocaml").setup()
-    end,
+    opts = {},
   },
 }
