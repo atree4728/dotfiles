@@ -5,6 +5,8 @@
   ...
 }:
 {
+  imports = [ ./homebrew.nix ];
+
   determinateNix.enable = true;
 
   programs.fish = {

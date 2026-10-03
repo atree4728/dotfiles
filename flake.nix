@@ -33,8 +33,7 @@
         modules = [
           determinate.darwinModules.default
           { nixpkgs.hostPlatform = "aarch64-darwin"; }
-          ./nix/darwin.nix
-          ./nix/homebrew.nix
+          ./nix/darwin
           home-manager.darwinModules.home-manager
           {
             system.primaryUser = username;

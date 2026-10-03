@@ -54,7 +54,7 @@ mise run gc       # delete generations older than 7 days; upgrade runs it too
 
 `mise run upgrade` runs [topgrade](https://github.com/topgrade-rs/topgrade), configured in `nix/home/topgrade.nix`; when a step fails it asks whether to retry, skip or quit, and each step can be run alone (`topgrade --only rustup`). It ends with `mise run gc` and `mise run lock`; the latter commits `flake.lock` and `config/nvim/lazy-lock.json` and nothing else; run it by hand after a step that was run alone. If the build fails after the update, `flake.lock` is restored.
 
-On macOS, Homebrew packages that are not declared in `nix/homebrew.nix` are uninstalled by `mise run apply`, so declare a formula or cask there instead of running `brew install`.
+On macOS, Homebrew packages that are not declared in `nix/darwin/homebrew.nix` are uninstalled by `mise run apply`, so declare a formula or cask there instead of running `brew install`.
 
 On macOS, VS Code is only installed from here; its settings, keybindings and extensions are kept by its own Settings Sync, so sign in to it once per machine.
 
