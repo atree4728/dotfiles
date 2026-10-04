@@ -37,6 +37,7 @@
       "abue-ammar/tinycast/tinycast"
       "anki"
       "discord"
+      "font-harano-aji"
       "gcloud-cli"
       "google-chrome"
       "guitar-pro"

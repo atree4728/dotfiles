@@ -37,6 +37,7 @@
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     plemoljp-nf
+    source-sans
     udev-gothic-nf
   ];
 
