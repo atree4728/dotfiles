@@ -43,6 +43,7 @@
       "guitar-pro"
       "karabiner-elements"
       "keybase"
+      "keycastr"
       "macskk"
       "mactex-no-gui"
       "monitorcontrol"
