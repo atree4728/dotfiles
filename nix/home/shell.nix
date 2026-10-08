@@ -53,7 +53,19 @@ lib.mkMerge [
 
     programs.zsh.enable = true;
 
-    programs.opam.enable = true;
+    # opam 2.6 migrates ~/.opam irreversibly; drop the override once nixpkgs ships 2.6.0 (NixOS/nixpkgs#564221).
+    programs.opam = {
+      enable = true;
+      package = pkgs.opam.overrideAttrs (
+        finalAttrs: _: {
+          version = "2.6.0";
+          src = pkgs.fetchurl {
+            url = "https://github.com/ocaml/opam/releases/download/${finalAttrs.version}/opam-full-${finalAttrs.version}.tar.gz";
+            hash = "sha256-66c2AlP9eR657aq+SEjqDFmzXaX19duq/162i/YYygg=";
+          };
+        }
+      );
+    };
 
     programs.direnv = {
       enable = true;
