@@ -5,6 +5,7 @@ return {
       codelens = { enabled = true },
       servers = {
         ocamllsp = {
+          mason = false,
           settings = {
             codelens = { enable = true },
             extendedHover = { enable = true },
