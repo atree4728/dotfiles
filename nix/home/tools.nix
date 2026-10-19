@@ -21,7 +21,6 @@ lib.mkMerge [
       imagemagick
       iverilog
       neovim
-      pkgconf
       poppler-utils
       procs
       qemu

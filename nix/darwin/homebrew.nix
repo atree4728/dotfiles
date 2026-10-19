@@ -28,6 +28,7 @@
     brews = [
       "gcc"
       "llvm"
+      "pkgconf"
       "riscv-software-src/riscv/riscv-tools"
     ];
 
