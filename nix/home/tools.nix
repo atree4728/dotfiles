@@ -17,6 +17,7 @@ lib.mkMerge [
       ghq
       glow
       gnumake
+      google-cloud-sdk
       hyperfine
       imagemagick
       iverilog
