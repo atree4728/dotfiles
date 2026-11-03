@@ -58,6 +58,7 @@
       "steam"
       "thebrowsercompany-dia"
       "visual-studio-code"
+      "wireshark-app"
       "zen"
       "zoom"
       "zotero"
