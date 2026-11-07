@@ -20,7 +20,6 @@
           trusted = true;
         })
         [
-          "abue-ammar/tinycast"
           "nikitabobko/tap"
           "riscv-software-src/riscv"
         ];
@@ -35,7 +34,6 @@
     casks = [
       "1password"
       "1password-cli"
-      "abue-ammar/tinycast/tinycast"
       "anki"
       "discord"
       "font-harano-aji"
@@ -57,6 +55,7 @@
       "spotify"
       "steam"
       "thebrowsercompany-dia"
+      "tinycast"
       "visual-studio-code"
       "wireshark-app"
       "zen"
