@@ -35,6 +35,7 @@
       "1password"
       "1password-cli"
       "anki"
+      "claude"
       "discord"
       "font-harano-aji"
       "google-chrome"
