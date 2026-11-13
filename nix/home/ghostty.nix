@@ -10,6 +10,7 @@
         font-feature = "-dlig";
         theme = "Catppuccin Macchiato";
         shell-integration = "fish";
+        shell-integration-features = "ssh-env,ssh-terminfo";
         background-opacity = 0.85;
         background-blur-radius = 20;
         macos-titlebar-style = "transparent";
