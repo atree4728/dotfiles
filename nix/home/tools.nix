@@ -26,6 +26,7 @@ lib.mkMerge [
       poppler-utils
       procs
       qemu
+      radare2
       rip2
       (rocq-core.withPackages (ps: [ ps.stdlib ]))
       swi-prolog
