@@ -2,8 +2,10 @@ return {
   {
     "mason-org/mason.nvim",
     opts = function(_, opts)
+      -- HLS comes from ghcup and hlint from nix; mason's hlint is an x86_64-only build on macOS.
+      local external = { ["haskell-language-server"] = true, hlint = true }
       opts.ensure_installed = vim.tbl_filter(function(pkg)
-        return pkg ~= "haskell-language-server"
+        return not external[pkg]
       end, opts.ensure_installed or {})
     end,
   },
